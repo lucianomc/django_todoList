@@ -2,7 +2,12 @@ from django.shortcuts import render
 
 from todo_list.forms import UserModelForm
 
+
 # Create your views here.
+
+
+def index(request):
+    return render(request, 'todo_list/index.html')
 
 
 def create_user(request):

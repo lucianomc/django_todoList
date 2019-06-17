@@ -1,12 +1,40 @@
+
 from django.db import models
+from django.conf import settings
 from django.contrib.auth.models import User
 
 # Create your models here.
 
 
 class Tasks(models.Model):
-    admin = models.ForeignKey(User, on_delete=models.PROTECT)
+    creator = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name='admin')
+    name = models.CharField(
+        max_length=32,
+        default='No name')
     description = models.TextField()
     created_on = models.DateField(auto_now_add=True)
     finish_in = models.DateField()
-    priority = models.DecimalField(decimal_places=0, max_digits=1)
+    priority = models.PositiveIntegerField(blank=True, default='0')
+    assigned_to = models.ManyToManyField(
+        User,
+        blank=True,
+        through='TasksUsers',
+        related_name='associated')
+
+    class Meta:
+        verbose_name = "Task"
+
+    def __str__(self):
+        return self.name
+
+
+class TasksUsers(models.Model):
+    users = models.ForeignKey(User, on_delete=models.CASCADE)
+    task = models.ForeignKey('Tasks', on_delete=models.CASCADE)
+    status = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.users}, {self.task}"

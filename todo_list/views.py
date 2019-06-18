@@ -1,4 +1,7 @@
 from django.shortcuts import render
+from django.contrib.auth.models import User
+from django.http import HttpResponse, HttpResponseRedirect
+from django.urls import reverse
 
 from todo_list.forms import UserModelForm
 
@@ -7,7 +10,9 @@ from todo_list.forms import UserModelForm
 
 
 def index(request):
-    return render(request, 'todo_list/index.html')
+    users = User.objects.all().order_by('first_name')
+    context = {'users': users}
+    return render(request, 'todo_list/index.html', context)
 
 
 def create_user(request):
@@ -16,4 +21,5 @@ def create_user(request):
     if request.method == "POST":
         if form.is_valid():
             form.save()
+            return HttpResponseRedirect(reverse('todo_list:index'))
     return render(request, 'todo_list/cadastro.html', context)

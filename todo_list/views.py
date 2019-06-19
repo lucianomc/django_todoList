@@ -4,8 +4,14 @@ from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
 from django.views.generic import CreateView
 from django.views.generic.list import ListView
+from rest_framework import viewsets
 
 from todo_list.forms import UserModelForm
+from todo_list.serializers import UserSerializer
+from todo_list.serializers import TaskSerializer
+from todo_list.serializers import TaskUserSerializer
+from .models import Tasks
+from .models import TasksUsers
 
 # Create your views here.
 
@@ -34,3 +40,18 @@ class UserListView(ListView):
     template_name = 'todo_list/users.html'
     model = User
     context_object_name = 'users'
+
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all().order_by('id')
+    serializer_class = UserSerializer
+
+
+class TaskViewSet(viewsets.ModelViewSet):
+    queryset = Tasks.objects.all().order_by('id')
+    serializer_class = TaskSerializer
+
+
+class TaskUserViewSet(viewsets.ModelViewSet):
+    queryset = TasksUsers.objects.all()
+    serializer_class = TaskUserSerializer

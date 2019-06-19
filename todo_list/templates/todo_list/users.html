@@ -1,6 +1,7 @@
 {% extends '../base.html' %}
 
 {% block content%}
+<div class="container">
     <h1>Index</h1>
     <ul class="list-group">
         {% for user in users %}
@@ -13,5 +14,5 @@
     <a href="{% url 'todo_list:cadastro'%}">
         Novo usuário
     </a>
-    
+</div>
 {% endblock %}

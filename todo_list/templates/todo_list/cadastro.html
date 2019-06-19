@@ -1,19 +1,25 @@
 {% extends '../base.html' %}
 
 {% block content%}
-    <form action="{% url 'todo_list:cadastro' %}" method="POST">
-        <div class='form-group'>
+
+    <h5 class="card-title text-center">
+        Novo Usuário
+    </h5>
+
+    <form class="form-signin" action="{% url 'todo_list:cadastro' %}" method="POST">
+        <div class="form-label-group">
             {% csrf_token %}
-            <h2>Novo Usuário</h2>
             <label>Primeiro nome:</label>
                 {{ form.first_name}}
             <label>Sobrenome:</label>
                 {{ form.last_name}}
             <label>Username</label>
                 {{form.username}}
-            <label>Password</label>
+            <label>Senha</label>
                 {{form.password}}
-            <button type="submit">Criar</button>
+            <br>
+            <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Criar</button>
         </div>
-    </form>
+    </form>                    
+               
 {% endblock %}

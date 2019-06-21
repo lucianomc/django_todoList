@@ -1,12 +1,16 @@
 
-from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
-
-# Create your models here.
+from django.db import models
 
 
 class Tasks(models.Model):
+
+    PRIORITY = (
+        (3, 'Baixa'),
+        (5, 'Normal'),
+        (8, 'Alta'),
+    )
     creator = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
@@ -17,7 +21,7 @@ class Tasks(models.Model):
     description = models.TextField()
     created_on = models.DateField(auto_now_add=True)
     finish_in = models.DateField()
-    priority = models.PositiveIntegerField(blank=True, default='0')
+    priority = models.PositiveIntegerField(choices=PRIORITY, blank=True)
     assigned_to = models.ManyToManyField(
         User,
         blank=True,

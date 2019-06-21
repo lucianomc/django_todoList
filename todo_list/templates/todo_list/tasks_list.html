@@ -1,0 +1,23 @@
+{% extends '../base.html' %}
+
+{% block content%}
+
+<div class="container">
+    <h2 class="card-title text-center">Detalhes</h2>
+    <ul class="list-group">
+        {% for task in tasks %}
+        <li class="list-group-item">
+            {{task.creator}}
+            <ul>
+                <li>
+                    <a href="{% url 'todo_list:detail' task.id%}"> 
+                        {{task.name}}
+                    </a>
+                </li>
+            </ul>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+
+{% endblock %}

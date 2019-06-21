@@ -1,0 +1,23 @@
+{% extends '../base.html' %}
+
+{% block content%}
+<div class="container">
+    <h2 class="card-title text-center">
+        Usuários cadastrados
+    </h2>
+
+    <ul class="list-group">
+        {% for user in users %}
+        <li>
+            <a href="#">
+                {{user.first_name}}
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+    <br>
+    <a class="btn btn-lg btn-primary btn-block text-uppercase" href="{% url 'todo_list:cadastro'%}">
+        Novo usuário
+    </a>
+</div>
+{% endblock %}

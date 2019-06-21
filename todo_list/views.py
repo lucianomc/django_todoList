@@ -2,16 +2,15 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
-from django.views.generic import CreateView
+from django.views.generic import CreateView, DetailView
 from django.views.generic.list import ListView
 from rest_framework import viewsets
 
-from todo_list.forms import UserModelForm
-from todo_list.serializers import UserSerializer
-from todo_list.serializers import TaskSerializer
-from todo_list.serializers import TaskUserSerializer
-from .models import Tasks
-from .models import TasksUsers
+from todo_list.forms import TaskModelForm, UserModelForm
+from todo_list.serializers import (TaskSerializer, TaskUserSerializer,
+                                   UserSerializer)
+
+from .models import Tasks, TasksUsers
 
 # Create your views here.
 
@@ -31,15 +30,31 @@ def index(request):
 
 
 class UserCreateView(CreateView):
-    template_name = 'todo_list/cadastro.html'
+    template_name = 'todo_list/user_form.html'
     form_class = UserModelForm
     success_url = reverse_lazy('todo_list:index')
 
 
 class UserListView(ListView):
-    template_name = 'todo_list/users.html'
+    template_name = 'todo_list/user_list.html'
     model = User
     context_object_name = 'users'
+
+
+class TaskCreateView(CreateView):
+    model = Tasks
+    form_class = TaskModelForm
+    success_url = reverse_lazy('todo_list:index')
+
+
+class TaksListView(ListView):
+    model = Tasks
+    context_object_name = 'tasks'
+
+
+class TaskDetailView(DetailView):
+    model = Tasks
+    context_object_name = 'task'
 
 
 class UserViewSet(viewsets.ModelViewSet):

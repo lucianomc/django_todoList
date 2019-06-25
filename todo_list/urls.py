@@ -6,6 +6,7 @@ app_name = 'todo_list'
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('submit/', views.submit_login),
     path('users/', views.UserListView.as_view()),
     path('cadastro/', views.UserCreateView.as_view(), name='cadastro'),
     path('tasks/', views.TaksListView.as_view()),

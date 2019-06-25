@@ -21,7 +21,7 @@ class Tasks(models.Model):
     description = models.TextField()
     created_on = models.DateField(auto_now_add=True)
     finish_in = models.DateField()
-    priority = models.PositiveIntegerField(choices=PRIORITY, blank=True)
+    priority = models.PositiveIntegerField(choices=PRIORITY)
     assigned_to = models.ManyToManyField(
         User,
         blank=True,
@@ -36,9 +36,13 @@ class Tasks(models.Model):
 
 
 class TasksUsers(models.Model):
+    STATUS = (
+        (0, 'Pendente'),
+        (1, 'Concluído')
+    )
     users = models.ForeignKey(User, on_delete=models.CASCADE)
     task = models.ForeignKey('Tasks', on_delete=models.CASCADE)
-    status = models.BooleanField(default=False)
+    status = models.BooleanField(choices=STATUS, default=False)
 
     def __str__(self):
         return f"{self.users}, {self.task}"

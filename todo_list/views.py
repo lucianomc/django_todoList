@@ -6,13 +6,15 @@ from django.shortcuts import redirect, render
 from django.urls import reverse, reverse_lazy
 from django.views.generic import CreateView, DetailView
 from django.views.generic.list import ListView
-from rest_framework import viewsets
 
-from todo_list.forms import TaskModelForm, UserModelForm
-from todo_list.serializers import (TaskSerializer, TaskUserSerializer,
-                                   UserSerializer)
-
+from .forms import TaskModelForm, UserModelForm
 from .models import Tasks, TasksUsers
+
+# from rest_framework import viewsets
+
+# from todo_list.serializers import (TaskSerializer, TaskUserSerializer,
+#                                    UserSerializer)
+
 
 # Create your views here.
 # definifir as views dentro da pasta views e colocar o __init__.py.
@@ -65,7 +67,7 @@ class TaskCreateView(CreateView):
     success_url = reverse_lazy('todo_list:index')
 
 
-class TaksListView(ListView):
+class TaskListView(ListView):
     model = Tasks
     context_object_name = 'tasks'
 
@@ -75,16 +77,16 @@ class TaskDetailView(DetailView):
     context_object_name = 'task'
 
 
-class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all().order_by('id')
-    serializer_class = UserSerializer
+# class UserViewSet(viewsets.ModelViewSet):
+#     queryset = User.objects.all().order_by('id')
+#     serializer_class = UserSerializer
 
 
-class TaskViewSet(viewsets.ModelViewSet):
-    queryset = Tasks.objects.all().order_by('id')
-    serializer_class = TaskSerializer
+# class TaskViewSet(viewsets.ModelViewSet):
+#     queryset = Tasks.objects.all().order_by('id')
+#     serializer_class = TaskSerializer
 
 
-class TaskUserViewSet(viewsets.ModelViewSet):
-    queryset = TasksUsers.objects.all()
-    serializer_class = TaskUserSerializer
+# class TaskUserViewSet(viewsets.ModelViewSet):
+#     queryset = TasksUsers.objects.all()
+#     serializer_class = TaskUserSerializer

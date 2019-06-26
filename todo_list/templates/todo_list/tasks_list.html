@@ -18,6 +18,10 @@
         </li>
         {% endfor %}
     </ul>
+    <a href="{% url 'todo_list:create_task'%}"> 
+        Nova Tarefa
+    </a>
+    <p>{{user}} deseja <a href="/accounts/logout">sair?</a></p>
 </div>
 
 {% endblock %}

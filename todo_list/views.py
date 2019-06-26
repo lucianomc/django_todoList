@@ -10,19 +10,14 @@ from django.views.generic.list import ListView
 from .forms import TaskModelForm, UserModelForm
 from .models import Tasks, TasksUsers
 
-# from rest_framework import viewsets
-
-# from todo_list.serializers import (TaskSerializer, TaskUserSerializer,
-#                                    UserSerializer)
-
 
 # Create your views here.
 # definifir as views dentro da pasta views e colocar o __init__.py.
 # Dentro do init fazer o from views import a classe
 
 
-def index(request):
-    return render(request, 'todo_list/index.html')
+# def index(request):
+#     return render(request, 'todo_list/index.html')
 
 
 def submit_login(request):
@@ -75,18 +70,3 @@ class TaskListView(ListView):
 class TaskDetailView(DetailView):
     model = Tasks
     context_object_name = 'task'
-
-
-# class UserViewSet(viewsets.ModelViewSet):
-#     queryset = User.objects.all().order_by('id')
-#     serializer_class = UserSerializer
-
-
-# class TaskViewSet(viewsets.ModelViewSet):
-#     queryset = Tasks.objects.all().order_by('id')
-#     serializer_class = TaskSerializer
-
-
-# class TaskUserViewSet(viewsets.ModelViewSet):
-#     queryset = TasksUsers.objects.all()
-#     serializer_class = TaskUserSerializer

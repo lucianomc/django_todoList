@@ -15,18 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-# from rest_framework import routers
 
-# from todo_list.views import TaskUserViewSet, TaskViewSet, UserViewSet
-
-#alterar as routes e adicionar no app
-# router = routers.DefaultRouter()
-# router.register('usuarios', UserViewSet)
-# router.register('tasks', TaskViewSet)
-# router.register('tasksusers', TaskUserViewSet)
 
 urlpatterns = [
-    path('todolist/', include('todo_list.urls')),
+    path('', include('todo_list.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
     path('rest/', include('rest.urls')),
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),

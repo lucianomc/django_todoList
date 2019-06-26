@@ -3,11 +3,25 @@
 {% block content%}
 
 <div class="container">
-    <h2 class="card-title text-center">Detalhes</h2>
+    <h2 class="card-title text-center">Tarefas</h2>
     <ul class="list-group">
-        {% for task in tasks %}
+        <h4>Criadas por mim</h4>
+        {% for task in creator %}
         <li class="list-group-item">
-            {{task.creator}}
+            <!-- {{task.creator}} -->
+            <ul>
+                <li>
+                    <a href="{% url 'todo_list:detail' task.id%}"> 
+                        {{task.name}}
+                    </a>
+                </li>
+            </ul>
+        </li>
+        {% endfor %}
+        <h4>Associadas a mim</h4>
+        {% for task in assigned %}
+        <li class="list-group-item">
+            <!-- {{task.creator}} -->
             <ul>
                 <li>
                     <a href="{% url 'todo_list:detail' task.id%}"> 
@@ -18,10 +32,13 @@
         </li>
         {% endfor %}
     </ul>
-    <a href="{% url 'todo_list:create_task'%}"> 
-        Nova Tarefa
-    </a>
-    <p>{{user}} deseja <a href="/accounts/logout">sair?</a></p>
+    <br>
+    <p class="text-center">
+        <a href="{% url 'todo_list:create_task'%}"> 
+            Nova Tarefa
+        </a>
+    </p>
+    <p class="text-center">{{user}} deseja <a href="/accounts/logout">sair?</a></p>
 </div>
 
 {% endblock %}

@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 
     'todo_list.apps.TodoListConfig',
     'rest.apps.RestConfig',
+    'users',
 ]
 
 MIDDLEWARE = [

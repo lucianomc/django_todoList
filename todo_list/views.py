@@ -44,16 +44,16 @@ def submit_login(request):
     #     return render(request, 'todo_list/cadastro.html', context)
 
 
-class UserCreateView(CreateView):
-    template_name = 'todo_list/user_form.html'
-    form_class = UserModelForm
-    success_url = reverse_lazy('todo_list:index')
+# class UserCreateView(CreateView):
+#     template_name = 'todo_list/user_form.html'
+#     form_class = UserModelForm
+#     success_url = reverse_lazy('todo_list:index')
 
 
-class UserListView(ListView):
-    template_name = 'todo_list/user_list.html'
-    model = User
-    context_object_name = 'users'
+# class UserListView(ListView):
+#     template_name = 'todo_list/user_list.html'
+#     model = User
+#     context_object_name = 'users'
 
 
 class TaskCreateView(CreateView):
@@ -64,7 +64,17 @@ class TaskCreateView(CreateView):
 
 class TaskListView(ListView):
     model = Tasks
-    context_object_name = 'tasks'
+    #context_object_name = 'tasks'
+    # template_name = 'todo_list/tasks_list.html'
+
+    def get_context_data(self):
+        context = {
+            'creator': Tasks.objects.filter(
+                creator=self.request.user),
+            'assigned': Tasks.objects.filter(
+                assigned_to=self.request.user)
+        }
+        return context
 
 
 class TaskDetailView(DetailView):

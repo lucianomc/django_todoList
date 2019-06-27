@@ -20,6 +20,7 @@ class Tasks(models.Model):
         default='No name')
     description = models.TextField()
     created_on = models.DateField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     finish_in = models.DateField()
     priority = models.PositiveIntegerField(choices=PRIORITY)
     assigned_to = models.ManyToManyField(

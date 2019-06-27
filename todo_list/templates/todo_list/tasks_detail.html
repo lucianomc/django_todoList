@@ -2,15 +2,15 @@
 
 {% block content%}
 
-<h2 class="my-3">{{task.name}}</h2>
-<h3>Prioridade: {{task.priority}}</h3>
+<h2 class="my-3 text-center">{{task.name}}</h2>
+<h4 class="my-3"> Prioridade: {{task.priority}}</h4>
 <p>Descrição: {{task.description}}</p>
 <p>Data de entrega: {{task.finish_in}}</p>
 <p>Criada em: {{task.created_on}}</p>
 <p>Criado por: {{task.creator}}</p>
+<p>Status: </p>
 <p>Associado a: {{task.assigned_to.all}}</p>
-
-
+<p>Editado em: {{task.updated_at}}</p>
 
 
 {% endblock %}

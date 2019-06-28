@@ -1,0 +1,10 @@
+{% extends '../base.html' %}
+
+{% block content%}
+
+<form method="post">{% csrf_token %}
+    <p class="text-center">Tem certeza que deseja excluir:  "{{ object.name }}"?</p>
+    <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sim</button>
+</form>
+
+{% endblock%}

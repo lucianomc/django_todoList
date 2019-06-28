@@ -14,6 +14,10 @@
                     <a href="{% url 'todo_list:detail' task.id%}"> 
                         {{task.name}}
                     </a>
+                    <a style="float:right" href="{% url 'todo_list:delete_task' task.id %}">
+                        Remover
+                    </a>
+                    <br>
                     <a style="float:right" href="{% url 'todo_list:update_task' task.id %}">
                         Editar
                     </a>

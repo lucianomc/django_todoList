@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.urls import reverse, reverse_lazy
-from django.views.generic import CreateView, DetailView, UpdateView
+from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
 from django.views.generic.list import ListView
 
 from .forms import TaskModelForm
@@ -14,7 +14,7 @@ from .models import Tasks, TasksUsers
 class TaskCreateView(CreateView):
     model = Tasks
     form_class = TaskModelForm
-    success_url = reverse_lazy('/')
+    success_url = reverse_lazy('todo_list:list_task')
 
     def form_valid(self, form):
         form.instance.creator = self.request.user
@@ -43,3 +43,8 @@ class TaskListView(ListView):
 class TaskDetailView(DetailView):
     model = Tasks
     context_object_name = 'task'
+
+
+class TaskDeleteView(DeleteView):
+    model = Tasks
+    success_url = reverse_lazy('todo_list:list_task')

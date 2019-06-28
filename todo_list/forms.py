@@ -14,8 +14,7 @@ class TaskModelForm(forms.ModelForm):
                 attrs={'class': 'form-control', 'maxlength': 128}),
             'description': forms.Textarea(
                 attrs={'class': 'form-control', 'maxlength': 128}),
-            'finish_in': forms.DateInput(
-                attrs={'class': 'form-control', 'maxlength': 128}),
+            'finish_in': forms.SelectDateWidget,
             'priority': forms.Select(
                 attrs={'class': 'form-control', 'maxlength': 128}),
         }

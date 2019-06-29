@@ -4,6 +4,8 @@ from django.urls import path
 from .views import (TaskCreateView, TaskDeleteView, TaskDetailView,
                     TaskListView, TaskUpdateView)
 
+from .views import TaskUserCreateView, TaskUserUpdateView
+
 app_name = 'todo_list'
 
 urlpatterns = [
@@ -21,5 +23,11 @@ urlpatterns = [
 
     path('tasks/<int:pk>/delete',
          login_required(TaskDeleteView.as_view()), name='delete_task'),
+
+    path('task/assigned/<int:pk>',
+         login_required(TaskUserCreateView.as_view()), name='assigned'),
+
+    path('task/assigned/<int:pk>/update',
+         login_required(TaskUserUpdateView.as_view()), name='update_assigned')
 
 ]

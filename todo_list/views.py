@@ -48,3 +48,21 @@ class TaskDetailView(DetailView):
 class TaskDeleteView(DeleteView):
     model = Tasks
     success_url = reverse_lazy('todo_list:list_task')
+
+
+class TaskUserCreateView(CreateView):
+    model = TasksUsers
+    fields = ['users', 'status']
+    #fields = '__all__'
+    success_url = reverse_lazy('todo_list:list_task')
+
+    def form_valid(self, form):
+        form.instance.task_id = self.kwargs['pk']
+        # print(self.kwargs['pk'])
+        return super(TaskUserCreateView, self).form_valid(form)
+
+
+class TaskUserUpdateView(UpdateView):
+    model = TasksUsers
+    fields = ['status']
+    success_url = reverse_lazy('todo_list:list_task')

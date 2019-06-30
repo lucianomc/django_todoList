@@ -47,3 +47,4 @@ class TasksUsers(models.Model):
 
     def __str__(self):
         return f"{self.users}, {self.task}"
+    

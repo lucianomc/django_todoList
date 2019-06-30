@@ -129,10 +129,22 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 REST_FRAMEWORK = {
+    # 'DEFAULT_PERMISSION_CLASSES': (
+    # #     # Como os endpoints serão autenticados
+
+    #     'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+    # ),
+    # 'DEFAULT_AUTHENTICATION_CLASSES': (
+    # #     # Tipos de autenticação suportados pela API
+
+    #     'rest_framework_simplejwt.authentication.JWTAuthentication',
+    #     'rest_framework.authentication.SessionAuthentication',
+    #     'rest_framework.authentication.TokenAuthentication',
+    # ),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10
 }
 
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/todolist/'
 
 LOGOUT_REDIRECT_URL = '/accounts/login'

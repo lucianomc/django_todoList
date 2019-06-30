@@ -5,6 +5,13 @@ from django.db import models
 
 
 class Tasks(models.Model):
+    """
+        Model relationed to task, consist in a creator, a name for the task 
+        (name), a description for the task (description), a date of creation 
+        (created_at), a date of update (update_at), a limit date of task 
+        (finish_in), a priority of task (priority) and a relacionship many to 
+        many to assigned users to execute this task (assigned_to).
+    """
 
     PRIORITY = (
         (3, 'Baixa'),
@@ -37,6 +44,10 @@ class Tasks(models.Model):
 
 
 class TasksUsers(models.Model):
+    """
+        This model relates, users and tasks. After create task, the creator 
+        has to associate the others users to doing this task.
+    """
     STATUS = (
         (0, 'Pendente'),
         (1, 'Concluído')

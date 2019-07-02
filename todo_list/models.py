@@ -3,7 +3,6 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
-from rest_framework import reverse as api_reverse
 
 
 class Tasks(models.Model):
@@ -47,9 +46,6 @@ class Tasks(models.Model):
     def get_absolute_url(self):
         return reverse('todo_list:detail', kwargs={'pk': self.id})
         # return "/todolist/tasks/%i" % (self.id)
-
-    # def get_api_url(self, request=None):
-    #     return api_reverse('todo_list:detail', kwargs={'pk': self.id}, request=request)
 
 
 class TasksUsers(models.Model):

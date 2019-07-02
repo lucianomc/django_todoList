@@ -21,9 +21,12 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class TaskSerializer(serializers.ModelSerializer):
+    url = serializers.SerializerMethodField(read_only=True)
+
     class Meta:
         model = Tasks
         fields = [
+            'url',
             'id',
             'creator',
             'name',
@@ -34,6 +37,11 @@ class TaskSerializer(serializers.ModelSerializer):
             'assigned_to'
         ]
         read_only_fields = ['id', 'creator']
+
+    def get_url(self, task):
+        # request = self.context.get("request")
+        # return task.get_api_url(request=request)
+        return task.get_absolute_url()
 
 
 class TaskUserSerializer(serializers.ModelSerializer):

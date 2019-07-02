@@ -27,6 +27,19 @@ class UserRudSet(generics.RetrieveUpdateDestroyAPIView):
         return User.objects.filter(id=self.request.user.id)
 
 
+class TaskRudSet(generics.RetrieveUpdateDestroyAPIView):
+    lookup_field = 'pk'
+    serializer_class = TaskSerializer
+    # queryset = Tasks.objects.all()
+
+    def get_queryset(self):
+        # return Tasks.objects.all()
+        return Tasks.objects.filter(creator=self.request.user.id)
+
+    def get_serializer_context(self, *args, **kwargs):
+        return {"request": self.request}
+
+
 class TaskAPIView(generics.CreateAPIView):
     lookup_field = 'pk'
     serializer_class = TaskSerializer
@@ -36,6 +49,7 @@ class TaskAPIView(generics.CreateAPIView):
         return Tasks.objects.filter(creator=self.request.user.id)
 
     def perform_create(self, serializer):
+        """To insert the user id in task's edit"""
         serializer.save(creator=self.request.user)
 
 
@@ -48,17 +62,11 @@ class TaskAPIListView(generics.ListAPIView):
         return Tasks.objects.filter(creator=self.request.user.id)
 
     def perform_create(self, serializer):
+        """To insert the user id in task's edit"""
         serializer.save(creator=self.request.user)
 
-
-class TaskRudSet(generics.RetrieveUpdateDestroyAPIView):
-    lookup_field = 'pk'
-    serializer_class = TaskSerializer
-    # queryset = Tasks.objects.all()
-
-    def get_queryset(self):
-        # return Tasks.objects.all()
-        return Tasks.objects.filter(creator=self.request.user.id)
+    # def get_serializer_context(self, *args, **kwargs):
+    #     return {"request": self.request}
 
 
 class TaskUserViewSet(viewsets.ModelViewSet):

@@ -10,6 +10,7 @@ app_name = 'rest'
 urlpatterns = [
     url(r'user/(?P<pk>\d+)/$', UserRudSet.as_view(), name='user_rud'),
     url(r'user/list/', UserAPIListView.as_view(), name='user_list'),
+    
     url(r'task/create/', TaskAPIView.as_view(), name='task_create'),
     url(r'task/list/', TaskAPIListView.as_view(), name='task_list'),
     url(r'task/(?P<pk>\d+)/$', TaskRudSet.as_view(), name='task_rud'),

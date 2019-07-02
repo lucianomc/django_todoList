@@ -8,10 +8,9 @@
         <h4>Criadas por mim</h4>
         {% for task in creator %}
         <li class="list-group-item">
-            <!-- {{task.creator}} -->
             <ul>
                 <li>
-                    <a href="{% url 'todo_list:detail' task.id%}"> 
+                    <a href="{{task.get_absolute_url}}"> 
                         {{task.name}}
                     </a>
                     <a style="float:right" href="{% url 'todo_list:update_task' task.id %}">

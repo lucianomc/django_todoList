@@ -44,10 +44,12 @@ class TaskSerializer(serializers.ModelSerializer):
         return task.get_absolute_url()
 
 
-class TaskUserSerializer(serializers.ModelSerializer):
+class TasksUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = TasksUsers
+        # fields = '__all__'
         fields = [
+            'id',
             'users',
             'task',
             'status'
